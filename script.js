@@ -1,6 +1,6 @@
 'use strict';
 
-const scores = [0, 0];
+let scores = [0, 0];
 let currentScore = 0;
 let activePlayer = 0;
 let playing = true;
@@ -81,3 +81,23 @@ btnHold.addEventListener('click', function () {
     }
 
 })
+
+//User resets Game 
+btnNew.addEventListener('click', function () {
+
+    //Set all scores to 0 
+    scores = [0, 0];
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+
+
+    currentScore = 0;
+    current0EL.textContent = 0;
+    current1EL.textContent = 0;
+
+    // Set Player 1 as starting player 
+    document.querySelector(`.player--${activePlayer}`).classList.remove('player--winner');
+    activePlayer = 0;
+    document.querySelector(`.player--${activePlayer}`).classList.add('player--active');
+    playing = true;
+});
