@@ -1,9 +1,5 @@
 'use strict';
 
-let scores = [0, 0];
-let currentScore = 0;
-let activePlayer = 0;
-let playing = true;
 
 // Selecting elements 
 const player0EL = document.querySelector('.player--0');
@@ -18,10 +14,30 @@ const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
-// Starting Conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-diceEl.classList.add('hidden');
+let scores, currentScore, activePlayer, playing;
+
+const init = function () {
+
+    // Starting Conditions
+    scores = [0, 0];
+    currentScore = 0;
+    activePlayer = 0;
+    playing = true;
+
+    //Set all scores to 0 
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0EL.textContent = 0;
+    current1EL.textContent = 0;
+    diceEl.classList.add('hidden');
+    player0EL.classList.remove('player--winner');
+    player1EL.classList.remove('player--winner');
+    player1EL.classList.add('player--active');
+    player1EL.classList.remove('player--active');
+
+}
+
+init();
 
 const switchPlayer = function () {
     // switch to next player
@@ -83,21 +99,4 @@ btnHold.addEventListener('click', function () {
 })
 
 //User resets Game 
-btnNew.addEventListener('click', function () {
-
-    //Set all scores to 0 
-    scores = [0, 0];
-    score0El.textContent = 0;
-    score1El.textContent = 0;
-
-
-    currentScore = 0;
-    current0EL.textContent = 0;
-    current1EL.textContent = 0;
-
-    // Set Player 1 as starting player 
-    document.querySelector(`.player--${activePlayer}`).classList.remove('player--winner');
-    activePlayer = 0;
-    document.querySelector(`.player--${activePlayer}`).classList.add('player--active');
-    playing = true;
-});
+btnNew.addEventListener('click', init);
